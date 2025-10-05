@@ -1,0 +1,124 @@
+# Spring Boot Application Configuration Template
+# Copy this file to src/main/resources/application.yml in your Spring Boot project
+
+spring:
+  application:
+    name: freelancer-backend
+  
+  # Profile Configuration
+  profiles:
+    active: dev
+  
+  # Database Configuration
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: 
+  
+  # JPA/Hibernate Configuration
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.H2Dialect
+    open-in-view: false
+  
+  # H2 Console Configuration (for development only)
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings:
+        web-allow-others: false
+  
+  # Jackson Configuration
+  jackson:
+    default-property-inclusion: non_null
+    serialization:
+      write-dates-as-timestamps: false
+    time-zone: UTC
+
+# Server Configuration
+server:
+  port: 8080
+  error:
+    include-message: always
+    include-binding-errors: always
+    include-stacktrace: on_param
+    include-exception: false
+  servlet:
+    context-path: /api
+
+# Spring Doc OpenAPI Configuration (Swagger)
+springdoc:
+  api-docs:
+    path: /api-docs
+    enabled: true
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+    operations-sorter: method
+    tags-sorter: alpha
+    doc-expansion: none
+  show-actuator: true
+
+# Actuator Configuration
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+      base-path: /actuator
+  endpoint:
+    health:
+      show-details: when-authorized
+  info:
+    env:
+      enabled: true
+
+# Logging Configuration
+logging:
+  level:
+    root: INFO
+    com.freelancer: DEBUG
+    org.springframework.web: DEBUG
+    org.springframework.security: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  file:
+    name: logs/freelancer-backend.log
+    max-size: 10MB
+    max-history: 10
+
+# Application Specific Configuration
+app:
+  name: Freelancer Platform
+  version: 0.0.1
+  description: Freelancer Platform Backend API
+  
+  # JWT Configuration
+  jwt:
+    secret: your-secret-key-change-this-in-production-min-256-bits
+    expiration: 86400000 # 24 hours in milliseconds
+    refresh-expiration: 604800000 # 7 days in milliseconds
+  
+  # CORS Configuration
+  cors:
+    allowed-origins: http://localhost:3000,http://localhost:4200
+    allowed-methods: GET,POST,PUT,DELETE,OPTIONS
+    allowed-headers: "*"
+    allow-credentials: true
+    max-age: 3600
+  
+  # File Upload Configuration
+  upload:
+    max-file-size: 10MB
+    max-request-size: 10MB
+    upload-dir: uploads/
