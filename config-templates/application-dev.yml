@@ -1,0 +1,58 @@
+# Development Profile Configuration
+# Copy this file to src/main/resources/application-dev.yml
+
+spring:
+  # Database Configuration for Development (H2)
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: 
+  
+  # JPA Configuration
+  jpa:
+    hibernate:
+      ddl-auto: create-drop # Recreate schema on each restart
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.H2Dialect
+  
+  # H2 Console
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  
+  # DevTools
+  devtools:
+    restart:
+      enabled: true
+    livereload:
+      enabled: true
+
+# Server Configuration
+server:
+  port: 8080
+
+# Logging for Development
+logging:
+  level:
+    root: INFO
+    com.freelancer: DEBUG
+    org.springframework.web: DEBUG
+    org.springframework.security: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
+# Application Configuration
+app:
+  jwt:
+    secret: dev-secret-key-min-256-bits-for-hs512-algorithm-change-in-production
+    expiration: 86400000 # 24 hours
+  cors:
+    allowed-origins: http://localhost:3000,http://localhost:4200,http://localhost:8081
+    allowed-methods: GET,POST,PUT,DELETE,OPTIONS,PATCH
+    allowed-headers: "*"
+    allow-credentials: true

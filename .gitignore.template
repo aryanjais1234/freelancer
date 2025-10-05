@@ -1,0 +1,125 @@
+# Java
+*.class
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# Gradle
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# IDE - IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+.idea_modules/
+
+# IDE - Eclipse
+.classpath
+.project
+.settings/
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.loadpath
+.recommenders
+
+# IDE - VS Code
+.vscode/
+*.code-workspace
+
+# IDE - NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# Spring Boot
+spring-boot-*.log
+*.log
+logs/
+application-local.yml
+application-local.properties
+
+# Database
+*.db
+*.sqlite
+*.h2.db
+
+# OS Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# Application
+uploads/
+temp/
+*.tmp
+
+# Security - Never commit these
+application-prod.yml
+application-prod.properties
+*.key
+*.pem
+*.crt
+*.jks
+.env
+.env.local
+.env.production
+
+# Test coverage
+coverage/
+.nyc_output/
+
+# Node modules (if using frontend)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Compiled source
+*.com
+*.dll
+*.exe
+*.o
+*.so
+
+# Package Files
+*.dmg
+*.gz
+*.iso
+*.tar
+*.tgz
+*.rar
+
+# Documentation generated
+docs/generated/
+site/
