@@ -1,6 +1,6 @@
 spring:
   application:
-    name: client-service
+    name: CLIENT-SERVICE
   datasource:
     url: jdbc:postgresql://localhost:5432/freelancer_client
     username: postgres

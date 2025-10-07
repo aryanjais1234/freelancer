@@ -2,6 +2,9 @@ package com.client.client_service.service;
 
 import com.client.client_service.dao.ClientRepository;
 import com.client.client_service.dto.ClientDto;
+import com.client.client_service.dto.Project;
+import com.client.client_service.dto.ProjectResponse;
+import com.client.client_service.feign.ProjectInterface;
 import com.client.client_service.model.Client;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,8 @@ import java.util.Optional;
 public class ClientService {
 
     private final ClientRepository clientRepository;
+
+    private final ProjectInterface projectInterface;
 
 
 
@@ -43,5 +48,9 @@ public class ClientService {
         client.setName(clientDto.getName());
         client.setEmail(clientDto.getEmail());
         client.setPassword(clientDto.getPassword());
+    }
+
+    public ProjectResponse createProject(Project project) {
+        return projectInterface.createProject(project);
     }
 }
