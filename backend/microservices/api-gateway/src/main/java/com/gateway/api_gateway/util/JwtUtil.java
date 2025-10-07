@@ -45,6 +45,26 @@ public class JwtUtil {
         return claims.get("role", String.class);
     }
 
+    public Long extractUserId(String token) {
+        Object userIdObj = Jwts.parserBuilder()
+                .setSigningKey(getKey())
+                .build()
+                .parseClaimsJws(token)
+                .getBody()
+                .get("userId");
+
+        if (userIdObj instanceof Integer) {
+            return ((Integer) userIdObj).longValue();
+        } else if (userIdObj instanceof Long) {
+            return (Long) userIdObj;
+        } else if (userIdObj instanceof String) {
+            return Long.valueOf((String) userIdObj);
+        } else {
+            return null;
+        }
+    }
+
+
     public String extractUsername(String token) {
         Claims claims = Jwts
                 .parserBuilder()

@@ -53,4 +53,14 @@ public class ClientService {
     public ProjectResponse createProject(Project project) {
         return projectInterface.createProject(project);
     }
+
+    public Integer getClientId(String username) {
+        Optional<Client> client = clientRepository.findByEmail(username);
+        if(client.isPresent()){
+            return client.get().getId();
+        } else {
+            System.out.println("Client not found with username: " + username);
+            return null;
+        }
+    }
 }

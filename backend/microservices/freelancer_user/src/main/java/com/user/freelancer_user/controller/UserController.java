@@ -73,7 +73,10 @@ public class UserController {
                     .map(GrantedAuthority::getAuthority)
                     .orElse("ROLE_USER"); // default fallback
             System.out.println("============="+role);
-            String token = jwtUtil.generateToken(request.getUserName(), role);
+            // ✅ Get userId from DB or UserDetailsService
+            User user = (User) userRepository.findByUserName(request.getUserName()).get();
+            String token = jwtUtil.generateToken(request.getUserName(), role, Long.valueOf(user.getId()));
+            System.out.println("UserId: " + jwtUtil.extractUserId(token));
             return ResponseEntity.ok(token);
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid access");

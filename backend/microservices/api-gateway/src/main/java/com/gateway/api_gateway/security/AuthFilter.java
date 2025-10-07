@@ -60,14 +60,20 @@ public class AuthFilter extends AbstractGatewayFilterFactory<AuthFilter.Config> 
                     // ✅ Extract the role and username from the token
                     String role = jwtUtil.extractRole(authHeader);
                     String username = jwtUtil.extractUsername(authHeader);
+                    Long userId = jwtUtil.extractUserId(authHeader);
                     System.out.println("======"+role);
                     System.out.println("User Role from JWT: " + role);
                     System.out.println("Username from JWT: " + username);
+                    System.out.println("UserId from JWT: " + userId);
 
                     // Add username to request headers for downstream services
                     exchange = exchange.mutate()
-                            .request(r -> r.header("username", username))
+                            .request(r -> r.headers(httpHeaders -> {
+                                httpHeaders.add("username", username);
+                                httpHeaders.add("userId", String.valueOf(userId));
+                            }))
                             .build();
+
 
                     // ✅ Optional: restrict endpoint based on role
                     if (path.startsWith("/clients/") || path.startsWith("/clients/createProject/")) {

@@ -18,9 +18,11 @@ import java.util.Map;
 public class JwtUtil {
     private final String secretKey = "WnZr4u7x!A%D*G-KaPdSgUkXp2s5v8y/B?E(H+MbQeThWmZq4t7w9z$C&F)J@NcRf";  // Replace with your own secure key
 
-    public String generateToken(String username, String role) {
+    public String generateToken(String username, String role, Long userId) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("role", role);
+        claims.put("userId", String.valueOf(userId));
+        System.out.println("Generating token for userId: " + userId + ", role: " + role);
 
         return Jwts.builder()
                 .setClaims(claims)
@@ -30,6 +32,16 @@ public class JwtUtil {
                 .signWith(getKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
+
+    public String extractUserId(String token) {
+        return Jwts.parserBuilder()
+                .setSigningKey(getKey())
+                .build()
+                .parseClaimsJws(token)
+                .getBody()
+                .get("userId", String.class);
+    }
+
 
     public void validateToken(final String token) {
         try {
@@ -55,6 +67,7 @@ public class JwtUtil {
                 .getBody()
                 .getSubject();
     }
+
 
     public String extractRole(String token) {
         return Jwts.parserBuilder()

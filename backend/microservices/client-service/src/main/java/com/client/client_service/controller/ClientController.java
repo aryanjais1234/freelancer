@@ -5,6 +5,7 @@ import com.client.client_service.dto.Project;
 import com.client.client_service.dto.ProjectResponse;
 import com.client.client_service.model.Client;
 import com.client.client_service.service.ClientService;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +31,17 @@ public class ClientController {
     }
 
     @PostMapping("/createProject")
-    public ResponseEntity<ProjectResponse> createProject(@RequestBody Project project) {
-        return ResponseEntity.ok(clientService.createProject(project));
-    }
+            public ResponseEntity<ProjectResponse> createProject(@RequestBody Project project,
+                                                                 @RequestHeader("username") String username,
+                                                                 @RequestHeader("userId") String userId) {
+                System.out.println("Request received to create project by user: " + username + " with userId: " + userId);
+//                Integer clientId = clientService.getClientId(username);
+                Integer clientId = Integer.parseInt(userId);
+                if (clientId != null) {
+                    project.setClientId(clientId);
+                    return ResponseEntity.ok(clientService.createProject(project));
+                } else {
+                    return ResponseEntity.status(404).body(null);
+                }
+            }
 }

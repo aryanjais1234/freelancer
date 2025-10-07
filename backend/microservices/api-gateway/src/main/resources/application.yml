@@ -18,6 +18,13 @@ spring:
             - Path=/clients/**
           filters:
             AuthFilter
+
+        - id: project-service
+          uri: lb://PROJECT-SERVICE
+          predicates:
+            - Path=/projects/**
+          filters:
+            AuthFilter
       server:
         webflux:
           discovery:
