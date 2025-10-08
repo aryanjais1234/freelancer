@@ -6,8 +6,8 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: freelancer-user
-          uri: lb://FREELANCER-USER
+        - id: user-service
+          uri: lb://USER-SERVICE
           predicates:
             - Path=/users/**
           filters:
@@ -16,6 +16,13 @@ spring:
           uri: lb://CLIENT-SERVICE
           predicates:
             - Path=/clients/**
+          filters:
+            AuthFilter
+
+        - id: freelancer-service
+          uri: lb://FREELANCER-SERVICE
+          predicates:
+            - Path=/freelancers/**
           filters:
             AuthFilter
 

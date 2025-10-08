@@ -31,7 +31,7 @@ public class AuthFilter extends AbstractGatewayFilterFactory<AuthFilter.Config> 
     public GatewayFilter apply(Config config) {
         return ((exchange, chain) -> {
             String path = exchange.getRequest().getURI().getPath();
-            if (path.startsWith("/users/create") || path.startsWith("/users/login")) {
+            if (path.startsWith("/users/register") || path.startsWith("/users/login")) {
                 System.out.println("===========Auth hit============");
                 return chain.filter(exchange);
             }
@@ -83,9 +83,14 @@ public class AuthFilter extends AbstractGatewayFilterFactory<AuthFilter.Config> 
                         }
                     }
 
-                    if (path.startsWith("/quiz//submit")) {
-                        if (!"ROLE_STUDENT".equalsIgnoreCase(role)) {
-                            throw new RuntimeException("Access Denied: Only students can submit quizzes");
+                    if (path.startsWith("/freelancers/")) {
+                        if (!"ROLE_FREELANCER".equalsIgnoreCase(role)) {
+                            throw new RuntimeException("Access Denied: Only freelancer can access this route");
+                        }
+                    }
+                    if (path.startsWith("/projects/getProject/")) {
+                        if (!"ROLE_FREELANCER".equalsIgnoreCase(role)) {
+                            throw new RuntimeException("Access Denied: Only freelancer can access this route");
                         }
                     }
                     if (path.startsWith("/quiz/create")) {

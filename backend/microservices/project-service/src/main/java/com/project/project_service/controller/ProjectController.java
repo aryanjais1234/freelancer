@@ -5,10 +5,7 @@ import com.project.project_service.model.Project;
 import com.project.project_service.service.ProjectService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/projects")
@@ -20,6 +17,11 @@ public class ProjectController {
     @PostMapping("/create")
     public ResponseEntity<ProjectDto> createProject(@RequestBody Project project) {
         return ResponseEntity.ok(projectService.createProject(project));
+    }
+
+    @GetMapping("/getProject/{id}")
+    public ResponseEntity<ProjectDto> getProjectById(@PathVariable Integer id) {
+        return ResponseEntity.ok(projectService.getProjectById(id));
     }
 
 }

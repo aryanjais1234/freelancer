@@ -1,35 +1,38 @@
-package com.client.client_service.model;
+package com.user.user_service.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
-@Entity(name = "clients_table")
+@Entity(name = "users_table")
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class Client {
+@NoArgsConstructor
+public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Integer userId;
-
+    @Column(unique = true, nullable = false)
     private String name;
-    private String email;
+    @Column(unique = true, nullable = false)
+    @Email
+    private String userName;
+    @Column(nullable = false)
+    @NonNull
     private String password;
-
-    private List<Integer> projectIds = new ArrayList<>();
+    @Enumerated
+    private UserRole role; // e.g., "FREELANCER" or "CLIENT"
 
     @CreationTimestamp
     private LocalDateTime createdAt;
     @UpdateTimestamp
     private LocalDateTime updatedAt;
-
 }

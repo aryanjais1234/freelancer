@@ -39,7 +39,7 @@ public class ClientController {
                 Integer clientId = Integer.parseInt(userId);
                 if (clientId != null) {
                     project.setClientId(clientId);
-                    return ResponseEntity.ok(clientService.createProject(project));
+                    return ResponseEntity.ok(clientService.createProject(project,userId));
                 } else {
                     return ResponseEntity.status(404).body(null);
                 }

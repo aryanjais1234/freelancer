@@ -6,6 +6,8 @@ import com.project.project_service.model.Project;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class ProjectService {
@@ -29,4 +31,11 @@ public class ProjectService {
         projectDto.setStatus(project.getStatus());
     }
 
+    public ProjectDto getProjectById(Integer id) {
+        Optional<Project> project = projectRepository.findById(id);
+        ProjectDto projectDto = new ProjectDto();
+        mapToProject(projectDto, project.orElse(null));
+        System.out.println(projectDto);
+        return projectDto;
+    }
 }

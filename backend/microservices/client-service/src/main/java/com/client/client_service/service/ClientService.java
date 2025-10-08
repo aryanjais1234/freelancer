@@ -7,9 +7,9 @@ import com.client.client_service.dto.ProjectResponse;
 import com.client.client_service.feign.ProjectInterface;
 import com.client.client_service.model.Client;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 @Service
@@ -32,12 +32,12 @@ public class ClientService {
         }
     }
 
-    public ClientDto createClient(ClientDto client) {
+    public ClientDto createClient(ClientDto clientDto) {
         try {
             Client newClient = new Client();
-            mapToClient(client, newClient);
+            mapToClient(clientDto, newClient);
             clientRepository.save(newClient);
-            return client;
+            return clientDto;
         } catch (Exception e) {
             return null;
         }
@@ -50,8 +50,21 @@ public class ClientService {
         client.setPassword(clientDto.getPassword());
     }
 
-    public ProjectResponse createProject(Project project) {
-        return projectInterface.createProject(project);
+    public ProjectResponse createProject(Project project, String userId) {
+        ProjectResponse projectResponse = new ProjectResponse();
+        Optional<Client> client = clientRepository.findByUserId(Integer.parseInt(userId));
+        if(client.isPresent()){
+            projectResponse = projectInterface.createProject(project);
+            Client projectClient = client.get();
+            if (projectClient.getProjectIds() == null) {
+                projectClient.setProjectIds(new ArrayList<>());
+            }
+            projectClient.getProjectIds().add(projectResponse.getId());
+            clientRepository.save(projectClient);
+        } else {
+
+        }
+        return projectResponse;
     }
 
     public Integer getClientId(String username) {
