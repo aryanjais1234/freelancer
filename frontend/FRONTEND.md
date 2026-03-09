@@ -122,4 +122,4 @@ const API_BASE_URL = 'http://localhost:8765';
 | axios | ^1.x | HTTP client |
 | sass | ^1.x | SCSS styling |
 | vite | ^7.x | Build tool |
-| vue-tsc | ^2.x | TypeScript type checking |
+| vue-tsc | ^3.x | TypeScript type checking |
