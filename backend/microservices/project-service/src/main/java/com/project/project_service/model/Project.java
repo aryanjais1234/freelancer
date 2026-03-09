@@ -11,6 +11,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity(name = "projects_table")
@@ -25,6 +26,10 @@ public class Project {
     private String title;
     private String description;
     private Double budget;
+    private Double budgetMin;
+    private Double budgetMax;
+    private String category;
+    private LocalDate deadline;
     private Duration duration; // e.g., in days
     private String status; // e.g., "OPEN", "IN_PROGRESS", "COMPLETED"
     private Integer assignedFreelancerId; // Nullable, set when a freelancer is assigned

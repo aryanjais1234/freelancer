@@ -24,6 +24,11 @@ public class Client {
     private String name;
     private String email;
     private String password;
+    private String companyName;
+    private String website;
+    @Column(length = 1000)
+    private String bio;
+    private Double rating;
 
     private List<Integer> projectIds = new ArrayList<>();
 

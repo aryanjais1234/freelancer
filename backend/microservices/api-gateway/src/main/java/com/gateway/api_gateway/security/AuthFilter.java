@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 
 @Component
@@ -20,6 +21,10 @@ public class AuthFilter extends AbstractGatewayFilterFactory<AuthFilter.Config> 
 
     @Autowired
     private JwtUtil jwtUtil;
+
+    private static final Pattern BID_PROJECT_PATTERN = Pattern.compile("^/bids/project/.*");
+    private static final Pattern BID_ACCEPT_PATTERN  = Pattern.compile("^/bids/[0-9]+/accept$");
+    private static final Pattern BID_REJECT_PATTERN  = Pattern.compile("^/bids/[0-9]+/reject$");
 
     public AuthFilter(){
         super(Config.class);
@@ -93,6 +98,20 @@ public class AuthFilter extends AbstractGatewayFilterFactory<AuthFilter.Config> 
                             throw new RuntimeException("Access Denied: Only freelancer can access this route");
                         }
                     }
+                    if (path.startsWith("/bids/submit") || path.startsWith("/bids/freelancer/")) {
+                        if (!"ROLE_FREELANCER".equalsIgnoreCase(role)) {
+                            throw new RuntimeException("Access Denied: Only freelancers can access this route");
+                        }
+                    }
+
+                    if (BID_PROJECT_PATTERN.matcher(path).matches()
+                            || BID_ACCEPT_PATTERN.matcher(path).matches()
+                            || BID_REJECT_PATTERN.matcher(path).matches()) {
+                        if (!"ROLE_CLIENT".equalsIgnoreCase(role)) {
+                            throw new RuntimeException("Access Denied: Only clients can access this route");
+                        }
+                    }
+
                     if (path.startsWith("/quiz/create")) {
                         if (!"ROLE_TEACHER".equalsIgnoreCase(role)) {
                             throw new RuntimeException("Access Denied: Only teachers can create quizzes");

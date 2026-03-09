@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -15,6 +17,13 @@ public class ProjectDto {
     private String title;
     private String description;
     private Double budget;
-    private Duration duration; // e.g., in days
-    private String status; // e.g., "OPEN", "IN_PROGRESS", "COMPLETED"
+    private Double budgetMin;
+    private Double budgetMax;
+    private String category;
+    private LocalDate deadline;
+    private Duration duration;
+    private String status;
+    private Integer assignedFreelancerId;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 }
