@@ -11,5 +11,9 @@ public class ClientDto {
     private String name;
     private String email;
     private String password;
+    private String companyName;
+    private String website;
+    private String bio;
+    private Double rating;
     private List<Integer> projectIds = new ArrayList<>();
 }

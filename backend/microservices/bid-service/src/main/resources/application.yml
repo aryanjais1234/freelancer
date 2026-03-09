@@ -1,9 +1,8 @@
 spring:
   application:
-    name: FREELANCER-SERVICE
-
+    name: BID-SERVICE
   datasource:
-    url: jdbc:postgresql://localhost:5432/freelancer_db
+    url: jdbc:postgresql://localhost:5432/bid_service
     username: postgres
     password: aryan
     driver-class-name: org.postgresql.Driver
@@ -16,7 +15,7 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
 
 server:
-  port: 8084
+  port: 8085
 
 eureka:
   client:
@@ -24,5 +23,3 @@ eureka:
     fetch-registry: true
     service-url:
       defaultZone: http://localhost:8761/eureka
-
-

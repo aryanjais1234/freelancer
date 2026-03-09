@@ -32,6 +32,13 @@ spring:
             - Path=/projects/**
           filters:
             AuthFilter
+
+        - id: bid-service
+          uri: lb://BID-SERVICE
+          predicates:
+            - Path=/bids/**
+          filters:
+            AuthFilter
       server:
         webflux:
           discovery:
