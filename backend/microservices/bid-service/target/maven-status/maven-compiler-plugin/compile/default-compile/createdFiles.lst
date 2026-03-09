@@ -1,9 +1,0 @@
-com/bid/bid_service/dao/BidRepository.class
-com/bid/bid_service/model/BidStatus.class
-com/bid/bid_service/feign/ProjectInterface.class
-com/bid/bid_service/model/Bid.class
-com/bid/bid_service/BidServiceApplication.class
-com/bid/bid_service/controller/BidController.class
-com/bid/bid_service/service/BidService.class
-com/bid/bid_service/dto/BidDto.class
-com/bid/bid_service/dto/BidRequest.class

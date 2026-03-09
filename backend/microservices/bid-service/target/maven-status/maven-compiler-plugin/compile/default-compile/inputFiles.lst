@@ -1,9 +1,0 @@
-/home/runner/work/freelancer/freelancer/backend/microservices/bid-service/src/main/java/com/bid/bid_service/BidServiceApplication.java
-/home/runner/work/freelancer/freelancer/backend/microservices/bid-service/src/main/java/com/bid/bid_service/controller/BidController.java
-/home/runner/work/freelancer/freelancer/backend/microservices/bid-service/src/main/java/com/bid/bid_service/dao/BidRepository.java
-/home/runner/work/freelancer/freelancer/backend/microservices/bid-service/src/main/java/com/bid/bid_service/dto/BidDto.java
-/home/runner/work/freelancer/freelancer/backend/microservices/bid-service/src/main/java/com/bid/bid_service/dto/BidRequest.java
-/home/runner/work/freelancer/freelancer/backend/microservices/bid-service/src/main/java/com/bid/bid_service/feign/ProjectInterface.java
-/home/runner/work/freelancer/freelancer/backend/microservices/bid-service/src/main/java/com/bid/bid_service/model/Bid.java
-/home/runner/work/freelancer/freelancer/backend/microservices/bid-service/src/main/java/com/bid/bid_service/model/BidStatus.java
-/home/runner/work/freelancer/freelancer/backend/microservices/bid-service/src/main/java/com/bid/bid_service/service/BidService.java
