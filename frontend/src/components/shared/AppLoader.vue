@@ -30,7 +30,7 @@ defineProps({
   &--overlay {
     position: fixed;
     inset: 0;
-    background: rgba($color-background, 0.85);
+    background: var(--color-navbar-bg);
     z-index: 999;
     backdrop-filter: blur(4px);
   }

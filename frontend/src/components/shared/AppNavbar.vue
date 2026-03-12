@@ -14,6 +14,10 @@
       </div>
 
       <div class="app-navbar__actions">
+        <button class="app-navbar__theme-toggle" @click="toggleTheme" :title="theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'" :aria-label="theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'">
+          <span v-if="theme === 'dark'">☀️</span>
+          <span v-else>🌙</span>
+        </button>
         <template v-if="isAuthenticated">
           <div class="app-navbar__user">
             <div class="app-navbar__avatar">{{ userInitials }}</div>
@@ -68,10 +72,13 @@ import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 import AppButton from './AppButton.vue';
 import AppBadge from './AppBadge.vue';
+import { useTheme } from '../../composables/useTheme';
 
 const store = useStore();
 const router = useRouter();
 const menuOpen = ref(false);
+
+const { theme, toggleTheme } = useTheme();
 
 const isAuthenticated = computed(() => store.getters['auth/isAuthenticated']);
 const currentUser = computed(() => store.getters['auth/currentUser']);
@@ -117,7 +124,7 @@ const handleLogout = async () => {
   left: 0;
   right: 0;
   z-index: 100;
-  background: rgba($color-background, 0.85);
+  background: var(--color-navbar-bg);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid $color-border-light;
   height: $navbar-height;
@@ -278,6 +285,26 @@ const handleLogout = async () => {
 
   &__mobile-logout {
     color: $color-danger-light;
+  }
+
+  &__theme-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: $radius-md;
+    background: none;
+    border: 1px solid $color-border-light;
+    cursor: pointer;
+    font-size: $font-size-lg;
+    transition: all $transition-fast;
+    flex-shrink: 0;
+
+    &:hover {
+      background: rgba(99, 102, 241, 0.15);
+      border-color: $color-primary;
+    }
   }
 }
 </style>

@@ -8,6 +8,10 @@
   color-scheme: dark;
 }
 
+[data-theme="light"] {
+  color-scheme: light;
+}
+
 body {
   font-family: $font-family-base;
   background-color: $color-background;

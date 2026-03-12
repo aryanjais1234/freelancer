@@ -2,10 +2,13 @@
 import { onMounted } from 'vue';
 import { useStore } from 'vuex';
 import AppNavbar from './components/shared/AppNavbar.vue';
+import { useTheme } from './composables/useTheme';
 
 const store = useStore();
+const { initTheme } = useTheme();
 
 onMounted(() => {
+  initTheme();
   store.dispatch('auth/restoreSession');
 });
 </script>
