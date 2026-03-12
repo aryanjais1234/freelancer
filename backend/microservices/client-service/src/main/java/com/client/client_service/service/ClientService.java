@@ -5,7 +5,6 @@ import com.client.client_service.dto.ClientDto;
 import com.client.client_service.dto.Project;
 import com.client.client_service.dto.ProjectResponse;
 import com.client.client_service.feign.ProjectInterface;
-import com.client.client_service.feign.ProjectQueryInterface;
 import com.client.client_service.model.Client;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,7 +19,6 @@ public class ClientService {
 
     private final ClientRepository clientRepository;
     private final ProjectInterface projectInterface;
-    private final ProjectQueryInterface projectQueryInterface;
 
     public Client getClientDetails(Integer id) {
         Optional<Client> client = clientRepository.findById(id);
@@ -91,7 +89,7 @@ public class ClientService {
         Optional<Client> optClient = clientRepository.findByUserId(userId);
         if (optClient.isPresent()) {
             Integer clientId = optClient.get().getId();
-            return projectQueryInterface.getProjectsByClient(clientId);
+            return projectInterface.getProjectsByClient(clientId);
         }
         return new ArrayList<>();
     }

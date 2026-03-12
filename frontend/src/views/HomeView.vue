@@ -31,23 +31,6 @@
             </RouterLink>
           </template>
         </div>
-
-        <div class="hero__stats">
-          <div class="hero__stat">
-            <span class="hero__stat-value">10K+</span>
-            <span class="hero__stat-label">Freelancers</span>
-          </div>
-          <div class="hero__stat-divider"></div>
-          <div class="hero__stat">
-            <span class="hero__stat-value">5K+</span>
-            <span class="hero__stat-label">Projects</span>
-          </div>
-          <div class="hero__stat-divider"></div>
-          <div class="hero__stat">
-            <span class="hero__stat-value">98%</span>
-            <span class="hero__stat-label">Satisfaction</span>
-          </div>
-        </div>
       </div>
 
       <div class="hero__bg-orbs">
